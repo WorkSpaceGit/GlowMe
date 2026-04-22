@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест: Смартпроєкт «Флікер»</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            /* Цементна/лофтова текстура */
+            background-color: #2b2b2c;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,0.015) 2px, rgba(255,255,255,0.015) 4px),
+                radial-gradient(circle at 50% 0%, #3a3a3c, #1a1a1b);
+            background-attachment: fixed;
+            font-family: 'Montserrat', sans-serif;
+            color: #e5e7eb;
+        }
+
+        h1, h2, h3, .font-oswald {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .loft-card {
+            background-color: rgba(38, 38, 38, 0.95);
+            border: 2px solid #444;
+            box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.7);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .loft-card:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.9);
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border: 1px solid #555;
+            background-color: #333;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .radio-label:hover {
+            background-color: #404040;
+            border-color: #f59e0b; /* Amber 500 */
+        }
+
+        input[type="radio"] {
+            display: none;
+        }
+
+        input[type="radio"]:checked + .custom-radio {
+            border-color: #f59e0b;
+            background-color: #f59e0b;
+            box-shadow: inset 0 0 0 3px #333;
+        }
+
+        input[type="radio"]:checked ~ .option-text {
+            color: #f59e0b;
+            font-weight: 600;
+        }
+
+        .custom-radio {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #777;
+            border-radius: 50%;
+            margin-right: 12px;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+
+        .btn-industrial {
+            background-color: #f59e0b;
+            color: #111;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            box-shadow: 4px 4px 0px #b45309;
+            transition: all 0.1s ease;
+        }
+
+        .btn-industrial:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px #b45309;
+        }
+
+        .btn-industrial:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0px #b45309;
+        }
+
+        /* Status classes for results */
+        .correct-answer {
+            background-color: rgba(16, 185, 129, 0.2) !important;
+            border-color: #10b981 !important;
+        }
+        .wrong-answer {
+            background-color: rgba(239, 68, 68, 0.2) !important;
+            border-color: #ef4444 !important;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center py-10 px-4 sm:px-6 lg:px-8">
+
+    <div class="w-full max-w-3xl">
+        <!-- Header -->
+        <header class="mb-10 text-center relative">
+            <div class="absolute inset-0 flex items-center justify-center opacity-10 z-0">
+                <span class="text-9xl font-oswald tracking-widest text-amber-500">FLICKER</span>
+            </div>
+            <div class="relative z-10">
+                <div class="inline-block bg-amber-500 text-stone-900 px-3 py-1 font-bold text-sm mb-3 tracking-widest uppercase">
+                    Технології • 8 Клас
+                </div>
+                <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-4">
+                    СМАРТПРОЄКТ <span class="text-amber-500">«ФЛІКЕР»</span>
+                </h1>
+                <p class="text-stone-400 max-w-2xl mx-auto text-lg">
+                    Перевір свої знання після опрацювання матеріалу про світловідбивачі. Уважно читай запитання та обирай правильний варіант.
+                </p>
+            </div>
+        </header>
+
+        <!-- Quiz Container -->
+        <form id="quiz-form" class="space-y-8">
+            <!-- Question 1 -->
+            <div class="loft-card p-6 md:p-8 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-1 h-full bg-amber-500"></div>
+                <h2 class="text-xl md:text-2xl mb-6 font-semibold"><span class="text-amber-500 mr-2">01 /</span> На якій відстані флікер дає змогу водію помітити пішохода в темряві?</h2>
+                <div class="space-y-3">
+                    <label class="radio-label">
+                        <input type="radio" name="q1" value="A">
+                        <div class="custom-radio"></div>
+                        <span class="option-text">На відстані 30–50 метрів</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="q1" value="B">
+                        <div class="custom-radio"></div>
+                        <span class="option-text">На відстані 130–150 метрів</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="q1" value="C">
+                        <div class="custom-radio"></div>
+                        <span class="option-text">На відстані понад 300 метрів</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="q1" value="D">
+                        <div class="custom-radio"></div>
+                        <span class="option-text">Флікер не впливає на відстань виявлення</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="loft-card p-6 md:p-8 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-1 h-full bg-amber-500"></div>
+                <h2 class="text-xl md:text-2xl mb-6 font-semibold"><span class="text-amber-500 mr-2">02 /</span> З якої мови походить слово "катафот" і що воно означає?</h2>
+                <div class="space-y-3">
+                    <label class="radio-label">
+                        <input type="radio" name="q2" value="A">
+                        <div class="custom-radio"></div>
+                        <span class="option-text">З латинської (відбивати промінь)</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="q2" value="B">
+                        <div class="custom-radio"></div>
+                        <span class="option-text">З англійської (яскраве світло)</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="q2" value="C">
+                        <div class="custom-radio"></div>
+                        <span class="option-text">З грецької (ката — проти, і фот — світло)</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="q2" value="D">
+                        <div class="custom-radio"></div>
+                        <span class="option-text">З французької (нічне бачення)</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="loft-card p-6 md:p-8 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-1 h-full bg-amber-500"></div>
+                <h2 class="text-xl md:text-2xl mb-6 font-semibold"><span class="text-amber-500 mr-2">03 /</span> Чому особливо важливо бути помітним, коли ми пересуваємося на велосипеді, самокаті чи роликах?</h2>
+                <div class="space-y-3">
+                    <label class="radio-label">
+                        <input type="radio" name="q3" value="A">
+                        <div class="custom-radio"></div>
+                        <span class="option-text">Тому що ми рухаємося швидше, ніж пішоходи, і часто маневруємо</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="q3" value="B">
+                        <div class="custom-radio"></div>
+                        <span class="option-text">Тому що такий транспорт зазвичай темного кольору</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="q3" value="C">
+                        <div class="custom-radio"></div>
+                        <span class="option-text">Це вимога виключно для спортивних змагань</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="q3" value="D">
+                        <div class="custom-radio"></div>
+                        <span class="option-text">Для покращення зовнішнього вигляду транспортного засобу</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="loft-card p-6 md:p-8 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-1 h-full bg-amber-500"></div>
+                <h2 class="text-xl md:text-2xl mb-6 font-semibold"><span class="text-amber-500 mr-2">04 /</span> За яким принципом діють світловідбивачі (флікери)?</h2>
+                <div class="space-y-3">
+                    <label class="radio-label">
+                        <input type="radio" name="q4" value="A">
+                        <div class="custom-radio"></div>
+                        <span class="option-text">За принципом сонячної батареї (накопичують світло вдень)</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="q4" value="B">
+                        <div class="custom-radio"></div>
+                        <span class="option-text">За принципом тепловізора (реагують на тепло)</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="q4" value="C">
+                        <div class="custom-radio"></div>
+                        <span class="option-text">За принципом котячого (стереоскопічного) зору</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="q4" value="D">
+                        <div class="custom-radio"></div>
+                        <span class="option-text">За принципом фосфорного світіння (хімічна реакція)</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="loft-card p-6 md:p-8 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-1 h-full bg-amber-500"></div>
+                <h2 class="text-xl md:text-2xl mb-6 font-semibold"><span class="text-amber-500 mr-2">05 /</span> З яких матеріалів можна виготовити основу для флікера згідно з підручником?</h2>
+                <div class="space-y-3">
+                    <label class="radio-label">
+                        <input type="radio" name="q5" value="A">
+                        <div class="custom-radio"></div>
+                        <span class="option-text">Тільки зі скла та спеціального пластику</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="q5" value="B">
+                        <div class="custom-radio"></div>
+                        <span class="option-text">Фетр, фанера, тонколистовий метал, фоаміран</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="q5" value="C">
+                        <div class="custom-radio"></div>
+                        <span class="option-text">Виключно з картону та паперу</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="q5" value="D">
+                        <div class="custom-radio"></div>
+                        <span class="option-text">Тільки з гуми та силікону</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center pt-6">
+                <button type="submit" class="btn-industrial text-xl px-12 py-4 font-bold w-full sm:w-auto">
+                    ПЕРЕВІРИТИ РЕЗУЛЬТАТ
+                </button>
+            </div>
+        </form>
+
+        <!-- Results Section (Hidden by default) -->
+        <div id="results" class="hidden mt-10 loft-card p-8 text-center border-t-4 border-t-amber-500">
+            <h2 class="font-oswald text-3xl mb-2 text-white">ТВІЙ РЕЗУЛЬТАТ</h2>
+            <div class="text-6xl font-black text-amber-500 mb-4 font-oswald" id="score-display">0 / 5</div>
+            <p id="feedback-message" class="text-xl text-stone-300 mb-6"></p>
+            <button id="retry-btn" class="border-2 border-stone-500 text-stone-300 hover:text-white hover:border-white px-6 py-2 uppercase font-oswald tracking-widest transition-colors">
+                Спробувати знову
+            </button>
+        </div>
+
+        <footer class="mt-16 text-center text-stone-500 text-sm pb-8 border-t border-stone-700 pt-6">
+            © 2026. Розроблено за матеріалами підручника "Технології. 8 клас" (Терещук, 2025).
+        </footer>
+    </div>
+
+    <!-- Logic -->
+    <script>
+        const correctAnswers = {
+            q1: 'B', // 130-150 метрів
+            q2: 'C', // З грецької (ката — проти, і фот — світло)
+            q3: 'A', // Тому що ми рухаємося швидше, ніж пішоходи, і часто маневруємо
+            q4: 'C', // За принципом котячого (стереоскопічного) зору
+            q5: 'B'  // Фетр, фанера, тонколистовий метал, фоаміран
+        };
+
+        const form = document.getElementById('quiz-form');
+        const resultsSection = document.getElementById('results');
+        const scoreDisplay = document.getElementById('score-display');
+        const feedbackMessage = document.getElementById('feedback-message');
+        const retryBtn = document.getElementById('retry-btn');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            let score = 0;
+            let answeredAll = true;
+
+            // Check answers
+            for (let key in correctAnswers) {
+                const selected = form.querySelector(`input[name="${key}"]:checked`);
+                const allLabels = form.querySelectorAll(`input[name="${key}"]`);
+                
+                // Reset previous styles
+                allLabels.forEach(input => {
+                    input.closest('.radio-label').classList.remove('correct-answer', 'wrong-answer');
+                });
+
+                if (!selected) {
+                    answeredAll = false;
+                    continue; // Skip grading if not all answered
+                }
+
+                const label = selected.closest('.radio-label');
+                
+                if (selected.value === correctAnswers[key]) {
+                    score++;
+                    label.classList.add('correct-answer');
+                } else {
+                    label.classList.add('wrong-answer');
+                    // Highlight the correct one too
+                    const correctInput = form.querySelector(`input[name="${key}"][value="${correctAnswers[key]}"]`);
+                    correctInput.closest('.radio-label').classList.add('correct-answer');
+                }
+            }
+
+            if (!answeredAll) {
+                alert("Будь ласка, дай відповідь на всі запитання перед перевіркою!");
+                return;
+            }
+
+            // Show results
+            scoreDisplay.textContent = `${score} / 5`;
+            
+            if (score === 5) {
+                feedbackMessage.innerHTML = "Відмінно! Ти справжній експерт з дорожньої безпеки та смартпроєктів! 🌟";
+            } else if (score >= 3) {
+                feedbackMessage.innerHTML = "Гарний результат! Але є куди рости. Переглянь помилки та запам'ятай правильні відповіді. 👍";
+            } else {
+                feedbackMessage.innerHTML = "Варто ще раз перечитати сторінку 62 підручника. Безпека — це важливо! 📚";
+            }
+
+            // Hide submit button, show results
+            form.querySelector('button[type="submit"]').style.display = 'none';
+            resultsSection.classList.remove('hidden');
+            
+            // Scroll to results smoothly
+            resultsSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+
+        retryBtn.addEventListener('click', function() {
+            form.reset();
+            form.querySelector('button[type="submit"]').style.display = 'inline-block';
+            resultsSection.classList.add('hidden');
+            
+            // Remove styling
+            const labels = document.querySelectorAll('.radio-label');
+            labels.forEach(label => {
+                label.classList.remove('correct-answer', 'wrong-answer');
+            });
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
